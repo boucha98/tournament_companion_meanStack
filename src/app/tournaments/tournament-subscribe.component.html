@@ -1,0 +1,17 @@
+<mymodal title="Chose  a tournament to subscribe: ">
+    <div body>
+        <div class="row">
+            <h4 style='margin-left:10px'>Tournaments availables</h4>
+            <div class="col-sm-12">
+                <mytable #tournamentsNoSubscribe [columnDefs]="noSubscribe" [getDataService]="getNoSubDataService" filterPlaceHolder="Filter Tournaments"
+                (selectedItemChanged)="selectedItemChanged($event)" [pageSize]="3" [cancellable]="false" [confirmDelete]="true" readOnly="true"></mytable>
+            </div>
+            <div *ngIf="!tournamentsAvailables">No tournament available.</div>
+            <div class="col-sm-12" [ngClass]="{'alert': true, 'alert-info': message}">{{message}}</div>
+        </div>
+    </div>
+    <div footer>
+        <button type="reset" class="btn btn-default" (click)="cancel()">Cancel</button>
+        <button type="reset" class="btn btn-default" [disabled]="selectedTournament? false : true" (click)="subscribeToTournament()">Subscribe to selected</button>
+    </div>
+</mymodal>

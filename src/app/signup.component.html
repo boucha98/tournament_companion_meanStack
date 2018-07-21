@@ -1,0 +1,21 @@
+<div class="row">
+    <div class="col-sm-6">
+        <h1>Signup</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-8">
+        <form class="form-horizontal" [formGroup]="frm" novalidate>
+            <my-input label="Pseudo" formControlName="pseudo" focus="true" labelWidth=3></my-input>
+            <my-input label="Profile" formControlName="profile" labelWidth=3></my-input>
+            <my-input label="Birthdate" type="date" formControlName="date" labelWidth=3></my-input>
+            <my-input label="Password" type="password" formControlName="password" labelWidth=3></my-input>
+            <my-input label="Confirm password" type="password" formControlName="confpassword" labelWidth=3></my-input>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button class="btn dtn-default" type="submit" (click)="signup()" [disabled]="frm.invalid">Signup</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

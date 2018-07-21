@@ -1,0 +1,19 @@
+<div class="row">
+    <div class="col-sm-6">
+        <h1>Login</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-8">
+        <form class="form-horizontal" [formGroup]="frm" novalidate>
+            <my-input label="Pseudo" formControlName="pseudo" focus="true"></my-input>
+            <my-input label="Password" type="password" formControlName="password"></my-input>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button class="btn dtn-default" type="submit" (click)="login()" [disabled]="frm.invalid">Login</button>
+                </div>
+            </div>
+            <div [ngClass]="'alert alert-' + (message.includes('failed') ? 'danger' : 'info')">{{message}}</div>
+        </form>
+    </div>
+</div>

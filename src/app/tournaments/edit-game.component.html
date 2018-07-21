@@ -1,0 +1,25 @@
+<mymodal title="{{'Edit your score in ' + (g ? g.game_name : '')}}">
+    <div body>
+        <div class="row">
+            <div class="col-sm-12">
+                <form class="form-horizontal" novalidate>
+                    <label>Please select your result: </label>
+                    <select #result>
+                        <option value="--" [selected]="!selected ? 'selected' : '' " disabled>--</option>
+                        <option value="0" [selected]="selected === 0 ? 'selected' : '' ">0</option>
+                        <option value="0.5" [selected]="selected === 0.5 ? 'selected' : '' ">0,5</option>
+                        <option value="1" [selected]="selected === 1 ? 'selected' : '' ">1</option>
+                    </select>
+                </form>
+            </div>
+        </div>   
+        <div class="row" *ngIf="message">
+            <div class="col-sm-12" [ngClass]="'alert alert-' + (message.includes('Failed') ? 'danger' : 'info')">{{message}}</div>
+        </div>     
+    </div>
+    <div footer>
+        <button type="reset" class="btn btn-default" [disabled]="result.value !== 'default' ? false : true" (click)="update(result.value)">Validate</button>
+        <button type="reset" class="btn btn-default" (click)="cancel()">Cancel</button>
+    </div>
+</mymodal>
+    

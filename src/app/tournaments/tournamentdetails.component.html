@@ -1,0 +1,49 @@
+<h1 class="col-sm-12">Tournament Details</h1>
+<div *ngIf="tournament;  else unknown"> <!-- *ngIf="tournament | async as t; -->
+    <div class="col-sm-12">
+        <div>
+            <label>Name : &nbsp;</label>{{tournament.name}}
+        </div>
+        <div>
+            <label>Start Date : &nbsp;</label>{{tournament.start | date: 'dd/MM/y' }}
+        </div>
+        <div>
+            <label>Finish Date : &nbsp;</label>{{(tournament.finish | date: 'dd/MM/y') || "&lt;undefined&gt;"}}
+        </div>
+        <div>
+            <label>Max Players : &nbsp;</label>{{tournament.maxPlayers}}
+        </div>
+    </div>
+    <hr>
+    <div style="display:inline;">
+        <div class="col-sm-5">
+            <h3>Members not assigned</h3>
+            <mytable #membersNotAssigned [columnDefs]="notAssignedColumnDefs" [getDataService]="getDataServiceNotAssigned"
+                filterPlaceHolder="Filter Members" [editComponent]="editMember" addCaption="Add New Member"
+                [pageSize]="4" (selectedItemChanged)="selectedItemChangedNotAssigned($event)" [cancellable]="false" [confirmDelete]="true" readOnly="true"></mytable>
+        </div>
+    </div>
+    <div style="display:inline;" class="col-sm-2 mycontainer">
+        <button style="display:block" type="button" class="btn btn-success mybutton" (click)="assignMember()" [disabled]="tournament.closed"> > </button>
+        <button style="display:block" type="button" class="btn btn-warning mybutton" (click)="unassignMember()" [disabled]="tournament.closed"> < </button>
+        <button style="display:block" type="button" class="btn btn-success mybutton" (click)="assignAllMembers()" [disabled]="tournament.closed"> >> </button>
+        <button style="display:block" type="button" class="btn btn-warning mybutton" (click)="unassignAllMembers()" [disabled]="tournament.closed"> << </button>
+    </div>
+    <div style="display:inline;">
+        <div class="col-sm-5">
+            <h3>Members assigned</h3>
+                <mytable #membersAssigned [columnDefs]="assignedColumnDefs" [getDataService]="getDataServiceAssigned"
+                filterPlaceHolder="Filter Members" [editComponent]="editMember" addCaption="Add New Member"
+                [pageSize]="4" (selectedItemChanged)="selectedItemChangedAssigned($event)" [cancellable]="false" [confirmDelete]="true" readOnly="true"></mytable>
+        </div>
+    </div>
+    <div class="col-sm-12">
+        <button style="display:block" type="button" class="btn btn-primary btn-block" (click)="gamesCreation()" [disabled]="tournament.closed">Close subscription</button>
+    </div>
+
+    <div class="col-sm-12" *ngIf="message" style="margin-top: 5px;">
+        <div [ngClass]="'alert alert-' + (message.includes('Failed') ? 'danger' : 'info')">{{message}}</div>
+    </div>
+</div>
+<ng-template #unknown>Unknown tournament !</ng-template>
+<snackbar #snackbar></snackbar>

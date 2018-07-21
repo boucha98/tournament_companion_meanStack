@@ -1,0 +1,18 @@
+<mymodal title="{{(frm.value._id ? 'Edit existing' : 'Add a new') + ' tournament'}}">
+    <div body>
+        <div class="row">
+            <div class="col-sm-12">
+                <form id="frm" class="form-horizontal" [formGroup]="frm" novalidate>
+                    <my-input #name label="Name" formControlName="name" [readonly]="frm.value._id"></my-input>
+                    <my-input label="Start Date" type="date" formControlName="start" [readonly]="isDisabled"></my-input>
+                    <my-input label="Finish Date" type="date" formControlName="finish" [readonly]="isDisabled"></my-input>
+                    <my-input label="Max Players" type="number" formControlName="maxPlayers" [readonly]="isDisabled"></my-input>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div footer>
+        <button type="submit" form="frm" class="btn btn-default" [disabled]="frm.pristine || frm.invalid || frm.pending || isDisabled" (click)="update()">{{frm.value._id ? 'Update' : 'Add'}}</button>
+        <button type="reset" class="btn btn-default" (click)="cancel()">Cancel</button>
+    </div>
+</mymodal>

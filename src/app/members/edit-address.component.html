@@ -1,0 +1,17 @@
+<mymodal title="{{(frm.value._id ? 'Edit existing' : 'Add a new') + ' address'}}">
+    <div body>
+        <div class="row">
+            <div class="col-sm-12">
+                <form id="frm" class="form-horizontal" [formGroup]="frm" novalidate>
+                    <my-input #street label="Street Address" formControlName="street_addr"></my-input>
+                    <my-input label="Postal Code" formControlName="postal_code"></my-input>
+                    <my-input label="Localization" formControlName="localization"></my-input>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div footer>
+        <button type="submit" form="frm" class="btn btn-default" [disabled]="frm.pristine || frm.invalid || frm.pending" (click)="update()">{{frm.value._id ? 'Update' : 'Add'}}</button>
+        <button type="reset" class="btn btn-default" (click)="cancel()">Cancel</button>
+    </div>
+</mymodal>

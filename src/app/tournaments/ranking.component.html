@@ -1,0 +1,13 @@
+<mymodal title='{{(tournament ? tournament.name : "") + "&#39;s ranking" }}'>
+    <div body>
+        <div class="row">
+            <div class="col-sm-12">
+                <mytable #tournamentRanking [columnDefs]="ranking" [getDataService]="getRankingDataService" filterPlaceHolder="Filter Members"
+                    [pageSize]="16" [cancellable]="false" [confirmDelete]="true" readOnly="true"></mytable>
+            </div>
+        </div>
+    </div>
+    <div footer>
+        <button type="reset" class="btn btn-default" (click)="cancel()">Close</button>
+    </div>
+</mymodal>
